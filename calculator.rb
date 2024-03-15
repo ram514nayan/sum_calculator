@@ -1,5 +1,10 @@
 class Calculator
   def add_numbers(input_str)
+    if input_str.empty? || input_str.strip.empty?
+      puts "Single line Input: #{input_str} || Output: 0"
+      return
+    end
+
     @errors = ''
     @input_string, delimiter = check_delimiter(input_str)
     @regex_str = /^[\d\(\)\-#{delimiter}]+$/
@@ -57,6 +62,10 @@ end
 
 calculator = Calculator.new
 
+#Test for empty string
+calculator.add_numbers('')
+calculator.add_numbers('   ')
+
 #Positive flow
 calculator.add_numbers "1,2,3,4"
 
@@ -75,3 +84,4 @@ calculator.add_numbers "//910915979-14"
 #Validation for last new line with multiple new lines and negative numbers
 calculator.add_numbers "23,43,34-\n\n\n234\n-21,45,\n,-\n,50\n"
 calculator.add_numbers "//;23;43;34\n\n\n234\n21;45;\n;\n50"
+calculator.add_numbers "//&5\n10&\n20"
