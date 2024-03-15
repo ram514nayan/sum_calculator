@@ -14,6 +14,27 @@ class Calculator
       puts "Negative numbers not allowed: #{negative_nums.join(', ')}"
     end
   end
+
+# For checking different delimiter and its test case
+  def check_delimiter str
+    if(str[0..1].include?("//"))
+      delimiter = str[2]
+      delimiter_check delimiter
+      str = str[3..str.length-1]
+    else
+      delimiter = ','
+    end
+    return str, delimiter
+  end
+
+  def delimiter_check del
+    begin
+      raise "Invalid input: Delimiter should not be number." unless del.to_s.match? /^(?![0-9]+$).*/
+    rescue StandardError => e
+      puts e
+    end
+  end
+
 end
 
 calculator = Calculator.new
